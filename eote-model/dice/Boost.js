@@ -1,4 +1,4 @@
-var Results = require("./Results.js");
+var Results = require("./../results/Results.js");
 var Die = require("./Die.js");
 
 var Boost = function () {

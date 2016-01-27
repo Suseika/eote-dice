@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Die = require('../eote-model/Die');
+var Die = require('../eote-model/dice/Die');
 var lodash = require('lodash');
 
 describe('Die', function () {

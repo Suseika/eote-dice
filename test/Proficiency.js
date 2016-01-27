@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Proficiency = require('../eote-model/Proficiency');
+var Proficiency = require('../eote-model/dice/Proficiency');
 var lodash = require('lodash');
 
 describe('Proficiency', function () {

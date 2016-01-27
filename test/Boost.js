@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Boost = require('../eote-model/Boost');
+var Boost = require('../eote-model/dice/Boost');
 var lodash = require('lodash');
 
 describe('Boost', function () {

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Challenge = require('../eote-model/Challenge');
+var Challenge = require('../eote-model/dice/Challenge');
 var lodash = require('lodash');
 
 describe('Challenge', function () {

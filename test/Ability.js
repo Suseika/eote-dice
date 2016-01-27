@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Ability = require('../eote-model/Ability');
+var Ability = require('../eote-model/dice/Ability');
 var lodash = require('lodash');
 
 describe('Ability', function () {
@@ -19,10 +19,7 @@ describe('Ability', function () {
     });
     describe('#numberOfSides()', function () {
         it('number of sides is 8', function () {
-            assert.equal(
-                8,
-                die.numberOfSides()
-            )
+            assert.equal(8, die.numberOfSides())
         })
     })
 });

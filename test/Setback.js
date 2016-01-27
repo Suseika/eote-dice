@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Setback = require('../eote-model/Setback');
+var Setback = require('../eote-model/dice/Setback');
 var lodash = require('lodash');
 
 describe('Setback', function () {

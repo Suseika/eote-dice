@@ -1,5 +1,5 @@
 var assert = require('assert');
-var Force = require('../eote-model/Force');
+var Force = require('../eote-model/dice/Force');
 var lodash = require('lodash');
 
 describe('Force', function () {
