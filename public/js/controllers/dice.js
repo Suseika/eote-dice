@@ -1,5 +1,20 @@
 angular.module("diceApp", [])
-    .controller("DiceSelectionController", function () {
+    .service('nameService', function () {
+        return {
+            playerName: "John Doe"
+        }
+    })
+    .controller("NameController", function ($scope, nameService) {
+        $scope.$watch(
+            function () {
+                return $scope.playerName
+            },
+            function (newValue) {
+                nameService.playerName = newValue
+            }
+        )
+    })
+    .controller("DiceSelectionController", function ($scope, nameService) {
         var diceSelection = this;
         diceSelection.types = [
             "ability",
@@ -20,7 +35,7 @@ angular.module("diceApp", [])
             setback: 0
         };
         diceSelection.selectDice = function (typeName, index) {
-            diceSelection.selected[typeName] = index+1;
+            diceSelection.selected[typeName] = index + 1;
         };
         diceSelection.selectedDice = function (dieType) {
             return _.range(0, diceSelection.selected[dieType])
@@ -28,7 +43,7 @@ angular.module("diceApp", [])
         diceSelection.unselectedDice = function (dieType) {
             return _.range(diceSelection.selected[dieType], 5)
         };
-        diceSelection.resetAll = function() {
+        diceSelection.resetAll = function () {
             diceSelection.selected.ability = 0;
             diceSelection.selected.boost = 0;
             diceSelection.selected.challenge = 0;
@@ -36,5 +51,8 @@ angular.module("diceApp", [])
             diceSelection.selected.force = 0;
             diceSelection.selected.proficiency = 0;
             diceSelection.selected.setback = 0;
-        }
+        };
+        diceSelection.roll = function () {
+            console.log(nameService.playerName + " rolls")
+        };
     });

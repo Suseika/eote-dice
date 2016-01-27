@@ -9,12 +9,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
-<div class="player_name">
-    <input type="text" ng-model="player_name" placeholder="Enter your name"
-           name="player_name"/>
+<div class="player_name" ng-controller="NameController as nameController">
+    <input type="text"
+           ng-model="playerName"
+           placeholder="Enter your name"
+           name="playerName"/>
 </div>
 <div class="dice" ng-controller="DiceSelectionController as diceSelection">
-    <div class="roll"><input type="button" name="roll" value="Roll"/></div>
+    <div class="roll">
+        <input type="button" name="roll" value="Roll"
+               ng-click="diceSelection.roll()"/>
+    </div>
     <div ng-repeat="dieType in diceSelection.types">
             <img ng-repeat="i in diceSelection.selectedDice(dieType)"
                  ng-src="/images/dice/{{dieType}}.png"
