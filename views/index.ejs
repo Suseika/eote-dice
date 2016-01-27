@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html ng-app="diceApp">
+<head>
+    <script src="/js/dependencies/angular/angular.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="/js/controllers/dice.js"></script>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<div class="player_name">
+    <input type="text" ng-model="player_name" placeholder="Enter your name"
+           name="player_name"/>
+</div>
+<div class="dice" ng-controller="DiceSelectionController as diceSelection">
+    <div class="roll"><input type="button" name="roll" value="Roll"/></div>
+    <div ng-repeat="dieType in diceSelection.types">
+            <img ng-repeat="i in diceSelection.selectedDice(dieType)"
+                 ng-src="/images/dice/{{dieType}}.png"
+                 ng-click="diceSelection.selectDice(dieType, i)"
+            />
+            <img ng-repeat="i in diceSelection.unselectedDice(dieType)"
+                 ng-src="/images/dice/{{dieType}}.png"
+                 ng-click="diceSelection.selectDice(dieType, i)"
+                 class="unselected"
+            />
+    </div>
+    <input type="button" name="reset" value="Reset all dice"
+           ng-click="diceSelection.resetAll()"/>
+</div>
+<div class="history">
+    <h3>History</h3>
+</div>
+
+</body>
 </html>
