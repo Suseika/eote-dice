@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var WebSocketServer = require('ws').Server;
+var wss = new WebSocketServer({ port: 3001 });
 
 var app = express();
 
@@ -62,5 +64,12 @@ app.use(function(err, req, res, next) {
   });
 });
 
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+  });
+
+  ws.send('{"greeting": "hello"}');
+});
 
 module.exports = app;

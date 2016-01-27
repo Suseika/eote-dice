@@ -1,4 +1,20 @@
-angular.module("diceApp", [])
+angular.module(
+    "diceApp",
+    [
+        "ngWebSocket"
+    ]
+    )
+    .factory("IncomingThrows", function ($websocket) {
+        var dataStream = $websocket('ws://' + window.location.hostname + ':3001/throws');
+        var throws = [];
+
+        dataStream.onMessage(function (message) {
+            throws.push(JSON.parse(message.data));
+        });
+        return {
+            throws: throws
+        }
+    })
     .service('nameService', function () {
         return {
             playerName: "John Doe"
@@ -14,7 +30,7 @@ angular.module("diceApp", [])
             }
         )
     })
-    .controller("DiceSelectionController", function ($scope, nameService) {
+    .controller("DiceSelectionController", function ($scope, nameService, IncomingThrows) {
         var diceSelection = this;
         diceSelection.types = [
             "ability",
