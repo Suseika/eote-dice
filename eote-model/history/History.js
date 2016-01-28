@@ -1,7 +1,11 @@
 var History = function () {
-    this.times = 0
+    this.diceThrowResults = [];
 };
-History.prototype.increment = function () {
-    this.times++
+History.prototype.addDiceThrowResult = function (diceThrowResult) {
+    this.diceThrowResults.push(diceThrowResult);
 };
-exports.History = History
+History.prototype.earlierThrows = function() {
+    return this.diceThrowResults;
+};
+
+module.exports = History;
