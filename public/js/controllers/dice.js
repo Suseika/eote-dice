@@ -3,7 +3,7 @@
  * @returns {WebSocket}
  */
 var createWebSocket = function (route) {
-    return new WebSocket('wss://' + window.location.hostname + route)
+    return new WebSocket(window.location.origin.replace('http', 'ws') + route)
 };
 
 angular.module("diceApp", [])
