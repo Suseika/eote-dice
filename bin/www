@@ -99,22 +99,32 @@ var DiceThrow = require("../eote-model/dice/DiceThrow");
 wss.broadcastNewThrow = function (data) {
   this.clients
       .filter(function (client) {
-        return url.parse(client.upgradeReq.url, true).pathname == "/newThrows"
+        return listensToNewThrows(client);
       })
       .forEach(function (client) {
         client.send(JSON.stringify(data));
       });
 };
 
+var history = require('../eote-model/history');
+
+function listensToNewThrows(client) {
+  return url.parse(client.upgradeReq.url, true).pathname == "/newThrows"
+}
+
 wss.on('connection', function connection(ws) {
+  if (listensToNewThrows(ws)) {
+    ws.send(JSON.stringify(history));
+  }
+
   ws.on('message', function incoming(message) {
     var data = JSON.parse(message);
     if (data.ping == 1) {
       // Do nothing, it is a ping for keeping session alive
     } else {
-      wss.broadcastNewThrow(
-          diceThrowResult( data )
-      );
+      var throwResult = diceThrowResult(data);
+      history.addDiceThrowResult(throwResult);
+      wss.broadcastNewThrow( throwResult );
     }
   });
 });
