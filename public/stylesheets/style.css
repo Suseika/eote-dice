@@ -21,4 +21,38 @@ a {
 .unselected {
   opacity: 0.1; }
 
+img.die-background {
+  height: 50px;
+  position: absolute; }
+
+.die-side {
+  width: 50px;
+  height: 50px;
+  display: inline-block; }
+
+img.die-result {
+  height: 21.73913px;
+  position: relative;
+  text-align: center;
+  display: block;
+  margin: auto auto; }
+
+.die-result-wrap-difficulty img.die-result {
+  height: 17.85714px;
+  position: relative;
+  top: -2px; }
+
+.die-result-wrap-challenge img.die-result {
+  height: 20.83333px;
+  position: relative;
+  left: -1px;
+  top: -1px; }
+
+.die-result-wrap {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
 /*# sourceMappingURL=style.css.map */

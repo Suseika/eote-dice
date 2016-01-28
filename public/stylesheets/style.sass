@@ -2,6 +2,13 @@ body
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
   color: black
 
+@mixin vertical-align
+  position: relative
+  top: 50%
+  -webkit-transform: translateY(-50%)
+  -ms-transform: translateY(-50%)
+  transform: translateY(-50%)
+
 a
   color: #00B7FF
 
@@ -20,3 +27,36 @@ a
 
 .unselected
   opacity: 0.1
+
+$resultDiceSize: 50px
+
+img.die-background
+  height: $resultDiceSize
+  position: absolute
+
+.die-side
+  width: $resultDiceSize
+  height: $resultDiceSize
+  display: inline-block
+
+img.die-result
+  height: $resultDiceSize / 2.3
+  position: relative
+  text-align: center
+  display: block
+  margin: auto auto
+
+.die-result-wrap-difficulty img.die-result
+  height: $resultDiceSize / 2.8
+  position: relative
+  top: -2px
+
+.die-result-wrap-challenge img.die-result
+  height: $resultDiceSize / 2.4
+  position: relative
+  left: -1px
+  top: -1px
+
+.die-result-wrap
+  @include vertical-align()
+
