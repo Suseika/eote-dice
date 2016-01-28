@@ -7,26 +7,7 @@ var createWebSocket = function (route) {
 };
 
 angular.module("diceApp", [])
-    .factory("IncomingThrows", function () {
-        var dataStream = createWebSocket("/newThrows");
-        var throws = [];
 
-        dataStream.onmessage = function (message) {
-            var items = JSON.parse(message.data);
-            throws.push(items);
-            console.log("incoming message:");
-            console.log(items)
-        };
-
-        return {
-            throws: throws
-        }
-    })
-    .service('history', function () {
-        return {
-            throwResults: []
-        }
-    })
     .service('nameService', function () {
         return {
             playerName: "John Doe"
@@ -42,7 +23,7 @@ angular.module("diceApp", [])
             }
         )
     })
-    .controller("DiceSelectionController", function ($scope, nameService, IncomingThrows, history) {
+    .controller("DiceSelectionController", function ($scope, nameService) {
         var diceSelection = this;
         diceSelection.types = [
             "ability",
@@ -84,13 +65,29 @@ angular.module("diceApp", [])
         diceSelection.roll = function () {
             var webSocket = createWebSocket("/roll");
             webSocket.onopen = function () {
-                webSocket.send(JSON.stringify(diceSelection.selected));
-            };
-            webSocket.onmessage = function (event) {
-                var thorResultsFromServer = JSON.parse(event.data);
-                history.throwResults = history.throwResults.concat(thorResultsFromServer);
+                webSocket.send(
+                    JSON.stringify(
+                        {
+                            playerName: nameService.playerName,
+                            diceThrow: diceSelection.selected
+                        }
+                    )
+                );
                 webSocket.close()
             };
-            console.log(nameService.playerName + " rolls");
+        };
+    })
+    .controller("HistoryController", function ($scope) {
+        var history = this;
+        history.throwResults = [];
+
+        var dataStream = createWebSocket("/newThrows");
+
+        dataStream.onmessage = function (message) {
+            var items = JSON.parse(message.data);
+            for (i in items) {
+                history.throwResults.push(items[i])
+            }
+            $scope.$apply();
         };
     });

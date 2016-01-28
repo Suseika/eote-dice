@@ -36,8 +36,13 @@
     <input type="button" name="reset" value="Reset all dice"
            ng-click="diceSelection.resetAll()"/>
 </div>
-<div class="history">
-    <h3>History</h3>
+<div class="history" ng-controller="HistoryController as history">
+    <div class="last-throw"></div>
+    <div class="previous-throws">
+        <div class="old-throw" ng-repeat="throwResult in history.throwResults">
+            {{throwResult}}
+        </div>
+    </div>
 </div>
 
 </body>

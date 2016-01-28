@@ -28,6 +28,6 @@ wss.on('connection', function connection(ws) {
 function diceThrowResult(diceThrowRequest) {
     return {
         playerName: diceThrowRequest.playerName,
-        rolls: DiceThrow.fromRequest(diceThrowRequest).resultingRolls()
+        rolls: DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingRolls()
     };
 }
