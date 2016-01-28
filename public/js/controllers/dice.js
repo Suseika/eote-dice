@@ -5,13 +5,9 @@
 var createWebSocket = function (route) {
     return new WebSocket('ws://' + window.location.hostname + ':3001' + route)
 };
-angular.module(
-    "diceApp",
-    [
-        "ngWebSocket"
-    ]
-    )
-    .factory("IncomingThrows", function ($websocket) {
+
+angular.module("diceApp", [])
+    .factory("IncomingThrows", function () {
         var dataStream = createWebSocket("/newThrows");
         var throws = [];
 
