@@ -5,7 +5,7 @@ var Setback = function () {
 };
 
 Setback.prototype = new Die(
-    "Setback",
+    "setback",
     [
         [Results.BLANK],
         [Results.BLANK],

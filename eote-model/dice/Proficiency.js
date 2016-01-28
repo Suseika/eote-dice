@@ -5,7 +5,7 @@ var Proficiency = function () {
 };
 
 Proficiency.prototype = new Die(
-    "Proficiency",
+    "proficiency",
     [
         [Results.BLANK],
         [Results.SUCCESS],

@@ -5,7 +5,7 @@ var Challenge = function () {
 };
 
 Challenge.prototype = new Die(
-    "Challenge",
+    "challenge",
     [
         [Results.BLANK],
         [Results.FAILURE],

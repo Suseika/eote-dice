@@ -5,7 +5,7 @@ var Ability = function () {
 };
 
 Ability.prototype = new Die(
-    "Ability",
+    "ability",
     [
         [Results.BLANK],
         [Results.SUCCESS],

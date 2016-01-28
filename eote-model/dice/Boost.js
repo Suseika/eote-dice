@@ -5,7 +5,7 @@ var Boost = function () {
 };
 
 Boost.prototype = new Die(
-    "Boost",
+    "boost",
     [
         [Results.BLANK],
         [Results.BLANK],

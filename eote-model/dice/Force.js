@@ -5,7 +5,7 @@ var Force = function () {
 };
 
 Force.prototype = new Die(
-    "Force",
+    "force",
     [
         [Results.DARK_SIDE],
         [Results.DARK_SIDE],
