@@ -13,61 +13,64 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap-superhero.min.css'/>
 </head>
 <body>
-<div class="container">
-    <div class="player_name form-group"
-         ng-controller="NameController as nameController">
-        <input type="text"
-               class="form-control"
-               ng-model="playerName"
-               placeholder="Меня зовут"
-               name="playerName"/>
-    </div>
-    <div class="dice" ng-controller="DiceSelectionController as diceSelection">
-        <div class="buttons">
+<div class="main">
+    <div class="content">
+        <div class="player_name form-group"
+             ng-controller="NameController as nameController">
+            <input type="text"
+                   class="form-control"
+                   ng-model="playerName"
+                   placeholder="Меня зовут"
+                   name="playerName"/>
+        </div>
+        <div class="dice"
+             ng-controller="DiceSelectionController as diceSelection">
+            <div class="buttons">
+                <input type="button"
+                       class="btn btn-default btn-huge"
+                       value="Roll"
+                       ng-click="diceSelection.roll()"
+                       ng-disabled="diceSelection.rollIsDisabled()"/>
             <input type="button"
+                   value="Reset"
                    class="btn btn-default btn-huge"
-                   value="Roll"
-                   ng-click="diceSelection.roll()"
-                   ng-disabled="diceSelection.rollIsDisabled()"/>
-        <input type="button"
-               value="Reset"
-               class="btn btn-default btn-huge"
-               ng-click="diceSelection.resetAll()"/>
+                   ng-click="diceSelection.resetAll()"/>
+            </div>
+            <div ng-repeat="dieType in diceSelection.types" class="die-type">
+                    <img ng-repeat="i in diceSelection.selectedDice(dieType)"
+                         ng-src="/images/dice/{{dieType}}.png"
+                         ng-click="diceSelection.selectDice(dieType, i)"
+                    />
+                    <img ng-repeat="i in diceSelection.unselectedDice(dieType)"
+                         ng-src="/images/dice/{{dieType}}.png"
+                         ng-click="diceSelection.selectDice(dieType, i)"
+                         class="unselected"
+                    />
+            </div>
+            <div class="clearfix"></div>
         </div>
-        <div ng-repeat="dieType in diceSelection.types" class="die-type">
-                <img ng-repeat="i in diceSelection.selectedDice(dieType)"
-                     ng-src="/images/dice/{{dieType}}.png"
-                     ng-click="diceSelection.selectDice(dieType, i)"
-                />
-                <img ng-repeat="i in diceSelection.unselectedDice(dieType)"
-                     ng-src="/images/dice/{{dieType}}.png"
-                     ng-click="diceSelection.selectDice(dieType, i)"
-                     class="unselected"
-                />
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="history" ng-controller="HistoryController as history">
-        <div class="last-throw"></div>
-        <div class="previous-throws">
-            <div class="old-throw"
-                 ng-repeat="throwResult in history.throwResults track by $index">
-                <div class="player-name">{{throwResult.playerName}}</div>
-                <div class="die-side"
-                     ng-repeat="dieResult in throwResult.rolls">
-                    <img class="die-background"
-                         ng-src="images/dice_backgrounds/{{dieResult.dieName}}.png"/>
-                    <div
-                        class="die-result-wrap die-result-wrap-{{dieResult.dieName}}">
-                    <img class="die-result"
-                         ng-repeat="result in dieResult.result"
-                         ng-src="images/results/{{result.basename}}.png"/>
+        <div class="history" ng-controller="HistoryController as history">
+            <div class="last-throw"></div>
+            <div class="previous-throws">
+                <div class="old-throw"
+                     ng-repeat="throwResult in history.throwResults track by $index">
+                    <div class="player-name">{{throwResult.playerName}}</div>
+                    <div class="die-side"
+                         ng-repeat="dieResult in throwResult.rolls">
+                        <img class="die-background"
+                             ng-src="images/dice_backgrounds/{{dieResult.dieName}}.png"/>
+                        <div
+                            class="die-result-wrap die-result-wrap-{{dieResult.dieName}}">
+                        <img class="die-result"
+                             ng-repeat="result in dieResult.result"
+                             ng-src="images/results/{{result.basename}}.png"/>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+<div class="footer"></div>
 </body>
 </html>

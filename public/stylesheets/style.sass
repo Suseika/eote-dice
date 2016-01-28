@@ -1,6 +1,6 @@
-.container
+.main
   width: 1024px
-  margin: 3em auto
+  margin: auto
 
 @mixin vertical-align
   position: relative
@@ -8,6 +8,38 @@
   -webkit-transform: translateY(-50%)
   -ms-transform: translateY(-50%)
   transform: translateY(-50%)
+
+@mixin sticky_footer($footer-height)
+  html, body
+    height: 100%
+  .main
+    min-height: 100%
+    overflow-x: hidden
+  .content
+    padding-bottom: $footer-height
+  .footer
+    clear: both
+    position: relative
+    margin-top: $footer-height * -1
+    height: $footer-height
+    overflow: visible
+
+// Unstick the footer
+@mixin unsticky_footer()
+  html, body
+    height: auto
+  .main
+    min-height: none
+  .content
+    padding-bottom: 0
+  .footer
+    margin-top: 1em
+    height: auto
+
+@include sticky_footer(20px)
+
+.footer
+  background-color: #485563
 
 .history
   overflow-y: scroll
@@ -82,4 +114,6 @@ input.btn-huge
   font-size: 3em
   padding: 1em
 
+.old-throw:nth-child(odd)
+  background-color: #2f6fad
 
