@@ -103,9 +103,14 @@ angular.module("diceApp", [])
         var dataStream = createWebSocket("/newThrows");
 
         dataStream.onmessage = function (message) {
-            history.throwResults.push(
-                JSON.parse(message.data)
-            );
+            var data = JSON.parse(message.data);
+            if (data.hasOwnProperty("archive")) {
+                data.archive.forEach(function(entry) {
+                    history.throwResults.push(entry);
+                })
+            } else {
+                history.throwResults.push(data);
+            }
             $scope.$apply();
         };
         setInterval(function () {
@@ -116,7 +121,7 @@ angular.module("diceApp", [])
                 _.keys(throwResult.effects)
                     .map(function (basename) {
                         return _.range(0, throwResult.effects[basename])
-                            .map(function(i) {
+                            .map(function (i) {
                                 return basename;
                             })
                     })
