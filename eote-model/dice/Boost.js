@@ -1,4 +1,4 @@
-var Results = require("./../results/Results.js");
+var Effects = require("../effects/Effects.js");
 var Die = require("./Die.js");
 
 var Boost = function () {
@@ -7,12 +7,12 @@ var Boost = function () {
 Boost.prototype = new Die(
     "boost",
     [
-        [Results.BLANK],
-        [Results.BLANK],
-        [Results.SUCCESS],
-        [Results.SUCCESS, Results.ADVANTAGE],
-        [Results.ADVANTAGE, Results.ADVANTAGE],
-        [Results.ADVANTAGE]
+        [Effects.BLANK],
+        [Effects.BLANK],
+        [Effects.SUCCESS],
+        [Effects.SUCCESS, Effects.ADVANTAGE],
+        [Effects.ADVANTAGE, Effects.ADVANTAGE],
+        [Effects.ADVANTAGE]
     ]
 );
 

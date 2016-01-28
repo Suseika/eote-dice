@@ -1,4 +1,4 @@
-var Results = require("./../results/Results.js");
+var Effects = require("../effects/Effects.js");
 var Die = require("./Die.js");
 
 var Challenge = function () {
@@ -7,18 +7,18 @@ var Challenge = function () {
 Challenge.prototype = new Die(
     "challenge",
     [
-        [Results.BLANK],
-        [Results.FAILURE],
-        [Results.FAILURE],
-        [Results.FAILURE, Results.FAILURE],
-        [Results.FAILURE, Results.FAILURE],
-        [Results.THREAT],
-        [Results.THREAT],
-        [Results.FAILURE, Results.THREAT],
-        [Results.FAILURE, Results.THREAT],
-        [Results.THREAT, Results.THREAT],
-        [Results.THREAT, Results.THREAT],
-        [Results.DESPAIR]
+        [Effects.BLANK],
+        [Effects.FAILURE],
+        [Effects.FAILURE],
+        [Effects.FAILURE, Effects.FAILURE],
+        [Effects.FAILURE, Effects.FAILURE],
+        [Effects.THREAT],
+        [Effects.THREAT],
+        [Effects.FAILURE, Effects.THREAT],
+        [Effects.FAILURE, Effects.THREAT],
+        [Effects.THREAT, Effects.THREAT],
+        [Effects.THREAT, Effects.THREAT],
+        [Effects.DESPAIR]
     ]
 );
 

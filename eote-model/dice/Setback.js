@@ -1,4 +1,4 @@
-var Results = require("./../results/Results.js");
+var Effects = require("../effects/Effects.js");
 var Die = require("./Die.js");
 
 var Setback = function () {
@@ -7,12 +7,12 @@ var Setback = function () {
 Setback.prototype = new Die(
     "setback",
     [
-        [Results.BLANK],
-        [Results.BLANK],
-        [Results.FAILURE],
-        [Results.FAILURE],
-        [Results.THREAT],
-        [Results.THREAT]
+        [Effects.BLANK],
+        [Effects.BLANK],
+        [Effects.FAILURE],
+        [Effects.FAILURE],
+        [Effects.THREAT],
+        [Effects.THREAT]
     ]
 );
 

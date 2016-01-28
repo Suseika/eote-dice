@@ -122,10 +122,10 @@ wss.on('connection', function connection(ws) {
 var EffectiveResult = require('../eote-model/dice/EffectiveResult');
 
 function diceThrowResult(diceThrowRequest) {
-  var rolls = DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingRolls();
+  var rolledSides = DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingSides();
   return {
     playerName: diceThrowRequest.playerName,
-    rolls: rolls,
-    effectiveResult: new EffectiveResult(rolls)
+    rolledSides: rolledSides,
+    effects: new EffectiveResult(rolledSides)
   };
 }

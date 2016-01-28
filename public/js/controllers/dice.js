@@ -111,12 +111,11 @@ angular.module("diceApp", [])
         setInterval(function () {
             dataStream.send("{\"ping\": 1}")
         }, 15000);
-        history.effectiveResults = function (throwResult) {
-            console.log(throwResult);
+        history.totalEffects = function (throwResult) {
             return _.flatten(
-                _.keys(throwResult.effectiveResult)
+                _.keys(throwResult.effects)
                     .map(function (basename) {
-                        return _.range(0, throwResult.effectiveResult[basename])
+                        return _.range(0, throwResult.effects[basename])
                             .map(function(i) {
                                 return basename;
                             })

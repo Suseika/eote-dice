@@ -1,4 +1,4 @@
-var Results = require("./../results/Results.js");
+var Effects = require("../effects/Effects.js");
 var Die = require("./Die.js");
 
 var Force = function () {
@@ -7,18 +7,18 @@ var Force = function () {
 Force.prototype = new Die(
     "force",
     [
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE],
-        [Results.DARK_SIDE, Results.DARK_SIDE],
-        [Results.LIGHT_SIDE],
-        [Results.LIGHT_SIDE],
-        [Results.LIGHT_SIDE, Results.LIGHT_SIDE],
-        [Results.LIGHT_SIDE, Results.LIGHT_SIDE],
-        [Results.LIGHT_SIDE, Results.LIGHT_SIDE]
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE],
+        [Effects.DARK_SIDE, Effects.DARK_SIDE],
+        [Effects.LIGHT_SIDE],
+        [Effects.LIGHT_SIDE],
+        [Effects.LIGHT_SIDE, Effects.LIGHT_SIDE],
+        [Effects.LIGHT_SIDE, Effects.LIGHT_SIDE],
+        [Effects.LIGHT_SIDE, Effects.LIGHT_SIDE]
     ]
 );
 

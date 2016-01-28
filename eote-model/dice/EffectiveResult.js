@@ -1,18 +1,18 @@
 var _ = require('lodash');
 /**
  * Effective results of rolling dice.
- * @param {DieRoll[]} dieRolls
+ * @param {DieSide[]} rolledSides
  * @constructor
  */
-var EffectiveResult = function (dieRolls) {
-    var rawSuccess = countResults(dieRolls, "success");
-    var rawAdvantage = countResults(dieRolls, "advantage");
-    var rawFailure = countResults(dieRolls, "failure");
-    var rawThreat = countResults(dieRolls, "threat");
-    var darkSide = countResults(dieRolls, "dark_side");
-    var lightSide = countResults(dieRolls, "light_side");
-    var triumph = countResults(dieRolls, "triumph");
-    var despair = countResults(dieRolls, "despair");
+var EffectiveResult = function (rolledSides) {
+    var rawSuccess = countEffects(rolledSides, "success");
+    var rawAdvantage = countEffects(rolledSides, "advantage");
+    var rawFailure = countEffects(rolledSides, "failure");
+    var rawThreat = countEffects(rolledSides, "threat");
+    var darkSide = countEffects(rolledSides, "dark_side");
+    var lightSide = countEffects(rolledSides, "light_side");
+    var triumph = countEffects(rolledSides, "triumph");
+    var despair = countEffects(rolledSides, "despair");
     this.success = Math.max(rawSuccess - rawFailure + triumph - despair, 0);
     this.advantage = Math.max(rawAdvantage - rawThreat, 0);
     this.failure = Math.max(rawFailure - rawAdvantage - triumph + despair, 0);
@@ -23,19 +23,19 @@ var EffectiveResult = function (dieRolls) {
     this.triumph = triumph;
 };
 /**
- * @param {DieRoll[]} dieRolls Rolls of dice.
+ * @param {DieSide[]} dieRolls Rolls of dice.
  * @param {string} basename Basename of a Result.
- * @returns {Number} Number of results of a particular type.
+ * @returns {Number} Number of effects of a particular type.
  */
-function countResults(dieRolls, basename) {
+function countEffects(dieRolls, basename) {
     return _.flatten(
         dieRolls
             .map(function (roll) {
-                return roll.result
+                return roll.effects;
             })
         )
         .filter(function (result) {
-            return result.basename == basename
+            return result.basename == basename;
         })
         .length
 }

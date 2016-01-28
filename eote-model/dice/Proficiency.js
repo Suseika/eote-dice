@@ -1,4 +1,4 @@
-var Results = require("./../results/Results.js");
+var Effects = require("../effects/Effects.js");
 var Die = require("./Die.js");
 
 var Proficiency = function () {
@@ -7,18 +7,18 @@ var Proficiency = function () {
 Proficiency.prototype = new Die(
     "proficiency",
     [
-        [Results.BLANK],
-        [Results.SUCCESS],
-        [Results.SUCCESS],
-        [Results.SUCCESS, Results.SUCCESS],
-        [Results.SUCCESS, Results.SUCCESS],
-        [Results.ADVANTAGE],
-        [Results.SUCCESS, Results.ADVANTAGE],
-        [Results.SUCCESS, Results.ADVANTAGE],
-        [Results.SUCCESS, Results.ADVANTAGE],
-        [Results.ADVANTAGE, Results.ADVANTAGE],
-        [Results.ADVANTAGE, Results.ADVANTAGE],
-        [Results.TRIUMPH]
+        [Effects.BLANK],
+        [Effects.SUCCESS],
+        [Effects.SUCCESS],
+        [Effects.SUCCESS, Effects.SUCCESS],
+        [Effects.SUCCESS, Effects.SUCCESS],
+        [Effects.ADVANTAGE],
+        [Effects.SUCCESS, Effects.ADVANTAGE],
+        [Effects.SUCCESS, Effects.ADVANTAGE],
+        [Effects.SUCCESS, Effects.ADVANTAGE],
+        [Effects.ADVANTAGE, Effects.ADVANTAGE],
+        [Effects.ADVANTAGE, Effects.ADVANTAGE],
+        [Effects.TRIUMPH]
     ]
 );
 

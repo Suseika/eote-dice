@@ -3,9 +3,9 @@
  * @param die {Die} A die to roll.
  * @constructor
  */
-var DieRoll = function(die) {
+var DieSide = function(die) {
     this.dieName = die.name;
-    this.result = die.roll();
+    this.effects = die.roll();
 };
 
-module.exports = DieRoll;
+module.exports = DieSide;
