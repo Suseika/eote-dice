@@ -9,7 +9,7 @@ var DieRoll = require("./DieRoll");
 var DiceThrow = function (dice) {
     this.dice = dice;
 };
-DiceThrow.prototype.resultingRolls = function () {
+DiceThrow.prototype.resultingSides = function () {
     return this.dice
         .map(function (die) {
             return new DieRoll(die);
