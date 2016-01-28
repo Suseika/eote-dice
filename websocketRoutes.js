@@ -3,7 +3,7 @@ var wss = new WebSocketServer({port: 3001, perMessageDeflate: false});
 var _ = require('lodash');
 var url = require('url');
 
-var dieFactory = require("./eote-model/dice/DieFactory");
+var DiceThrow = require("./eote-model/dice/DiceThrow");
 
 wss.broadcastNewThrow = function (data) {
     this.clients
@@ -25,31 +25,9 @@ wss.on('connection', function connection(ws) {
     });
 });
 
-function diceThrowResult(diceThrow) {
+function diceThrowResult(diceThrowRequest) {
     return {
-        playerName: diceThrow.playerName,
-        rolls: _.keys(diceThrow)
-            .map(function (dieTypeName) {
-                return {
-                    dieTypeName: dieTypeName,
-                    amount: diceThrow[dieTypeName]
-                }
-            })
-            .filter(function (dieTypeThrow) {
-                return dieTypeThrow.amount > 0;
-            })
-            .map(function (dieTypeThrow) {
-                return _.range(0, dieTypeThrow.amount)
-                    .map(function (i) {
-                        var die = dieFactory.createDie(dieTypeThrow.dieTypeName);
-                        return {
-                            dieName: die.name,
-                            results: die.roll()
-                                .map(function (rollResult) {
-                                    return rollResult.name;
-                                })
-                        };
-                    });
-            })
+        playerName: diceThrowRequest.playerName,
+        rolls: DiceThrow.fromRequest(diceThrowRequest).resultingRolls()
     };
 }
