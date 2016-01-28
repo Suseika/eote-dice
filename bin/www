@@ -108,11 +108,14 @@ wss.broadcastNewThrow = function (data) {
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
-    wss.broadcastNewThrow(
-        diceThrowResult(
-            JSON.parse(message)
-        )
-    );
+    var data = JSON.parse(message);
+    if (data.ping == 1) {
+      // Do nothing, it is a ping for keeping session alive
+    } else {
+      wss.broadcastNewThrow(
+          diceThrowResult( data )
+      );
+    }
   });
 });
 

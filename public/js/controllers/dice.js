@@ -109,4 +109,7 @@ angular.module("diceApp", [])
             );
             $scope.$apply();
         };
+        setInterval(function() {
+            dataStream.send("{\"ping\": 1}")
+        }, 15000)
     });
