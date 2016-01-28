@@ -55,16 +55,21 @@
                 <div class="old-throw"
                      ng-repeat="throwResult in history.throwResults.slice(0).reverse() track by $index">
                     <div class="result-player-name">{{throwResult.playerName}}</div>
-                            <div class="die-side"
-                                 ng-repeat="dieResult in throwResult.rolls">
-                                <img class="die-background"
-                                     ng-src="images/dice_backgrounds/{{dieResult.dieName}}.png"/>
-                                <div
-                                    class="die-result-wrap die-result-wrap-{{dieResult.dieName}}">
-                                <img class="die-result"
-                                     ng-repeat="result in dieResult.result"
-                                     ng-src="images/results/{{result.basename}}.png"/>
-                            </div>
+                    <div class="die-side"
+                         ng-repeat="dieResult in throwResult.rolls">
+                        <img class="die-background"
+                             ng-src="images/dice_backgrounds/{{dieResult.dieName}}.png"/>
+                        <div
+                            class="die-result-wrap die-result-wrap-{{dieResult.dieName}}">
+                            <img class="die-result"
+                                 ng-repeat="result in dieResult.result"
+                                 ng-src="images/results/{{result.basename}}.png"/>
+                        </div>
+                    </div>
+                    <div class="die-effective-results">
+                        <img class="die-effective-result"
+                             ng-repeat="effectiveResult in history.effectiveResults(throwResult) track by $index"
+                             ng-src="images/results/{{effectiveResult}}.png"/>
                     </div>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 var _ = require("lodash");
 var dieFactory = require("./DieFactory");
+var DieRoll = require("./DieRoll");
 /**
  *
  * @param {Die[]} dice Thrown dice.
@@ -11,10 +12,7 @@ var DiceThrow = function (dice) {
 DiceThrow.prototype.resultingRolls = function () {
     return this.dice
         .map(function (die) {
-            return {
-                dieName: die.name,
-                result: die.roll()
-            }
+            return new DieRoll(die);
         })
 };
 DiceThrow.fromRequest = function (parsedObject) {
@@ -42,4 +40,4 @@ DiceThrow.fromRequest = function (parsedObject) {
     );
 };
 
-module.exports = DiceThrow
+module.exports = DiceThrow;
