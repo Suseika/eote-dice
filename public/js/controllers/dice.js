@@ -84,10 +84,9 @@ angular.module("diceApp", [])
         var dataStream = createWebSocket("/newThrows");
 
         dataStream.onmessage = function (message) {
-            var items = JSON.parse(message.data);
-            for (i in items) {
-                history.throwResults.push(items[i])
-            }
+            history.throwResults.push(
+                JSON.parse(message.data)
+            );
             $scope.$apply();
         };
     });

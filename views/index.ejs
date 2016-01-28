@@ -39,8 +39,12 @@
 <div class="history" ng-controller="HistoryController as history">
     <div class="last-throw"></div>
     <div class="previous-throws">
-        <div class="old-throw" ng-repeat="throwResult in history.throwResults">
-            {{throwResult}}
+        <div class="old-throw" ng-repeat="throwResult in history.throwResults track by $index">
+            <div class="player-name">{{throwResult.playerName}}</div>
+            <div class="die-side" ng-repeat="dieResult in throwResult.rolls">
+                <img ng-src="images/dice_backgrounds/{{dieResult.dieName}}.png"/>
+                <img ng-repeat="result in dieResult.result" ng-src="images/results/{{result.basename}}.png"/>
+            </div>
         </div>
     </div>
 </div>
