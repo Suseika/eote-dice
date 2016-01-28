@@ -1,6 +1,6 @@
-body
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-  color: black
+.container
+  width: 1024px
+  margin: 3em auto
 
 @mixin vertical-align
   position: relative
@@ -9,19 +9,9 @@ body
   -ms-transform: translateY(-50%)
   transform: translateY(-50%)
 
-a
-  color: #00B7FF
-
-.player_list
-  background-color: red
-
 .history
-  background-color: antiquewhite
   overflow-y: scroll
   height: 200px
-
-.dice
-  background-color: gray
 
 .dice img
   user-select: none
@@ -68,7 +58,6 @@ img.die-result
   height: 30px
   text-align: center
   @include vertical-align()
-  background-color: navajowhite
   display: inline-block
   vertical-align: middle
   line-height: 30px

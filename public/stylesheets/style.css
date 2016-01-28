@@ -1,20 +1,10 @@
-body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: black; }
-
-a {
-  color: #00B7FF; }
-
-.player_list {
-  background-color: red; }
+.container {
+  width: 1024px;
+  margin: 3em auto; }
 
 .history {
-  background-color: antiquewhite;
   overflow-y: scroll;
   height: 200px; }
-
-.dice {
-  background-color: gray; }
 
 .dice img {
   user-select: none;
@@ -67,7 +57,6 @@ img.die-result {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-  background-color: navajowhite;
   display: inline-block;
   vertical-align: middle;
   line-height: 30px;
