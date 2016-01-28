@@ -7,20 +7,24 @@ var createWebSocket = function (route) {
 };
 
 angular.module("diceApp", [])
-
     .service('nameService', function () {
         return {
-            playerName: "John Doe"
         }
     })
     .controller("NameController", function ($scope, nameService) {
-        $scope.playerName = "";
+        var savedName = localStorage.getItem("playerName");
+        if (!savedName) {
+            $scope.playerName = "John Doe";
+        } else {
+            $scope.playerName = savedName;
+        }
         $scope.$watch(
             function () {
                 return $scope.playerName
             },
             function (newValue) {
-                nameService.playerName = newValue
+                nameService.playerName = newValue;
+                localStorage.setItem("playerName", newValue);
             }
         )
     })
