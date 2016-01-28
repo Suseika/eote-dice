@@ -8,8 +8,7 @@ var createWebSocket = function (route) {
 
 angular.module("diceApp", [])
     .service('nameService', function () {
-        return {
-        }
+        return {}
     })
     .controller("NameController", function ($scope, nameService) {
         var savedName = localStorage.getItem("playerName");
@@ -109,7 +108,19 @@ angular.module("diceApp", [])
             );
             $scope.$apply();
         };
-        setInterval(function() {
+        setInterval(function () {
             dataStream.send("{\"ping\": 1}")
-        }, 15000)
+        }, 15000);
+        history.effectiveResults = function (throwResult) {
+            console.log(throwResult);
+            return _.flatten(
+                _.keys(throwResult.effectiveResult)
+                    .map(function (basename) {
+                        return _.range(0, throwResult.effectiveResult[basename])
+                            .map(function(i) {
+                                return basename;
+                            })
+                    })
+            );
+        };
     });
