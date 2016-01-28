@@ -13,6 +13,16 @@
   overflow-y: scroll
   height: 200px
 
+.buttons
+  float: left
+
+.buttons input
+  display: block
+  clear: both
+
+.dice
+  text-align: center
+
 .dice img
   user-select: none
   cursor: pointer
@@ -25,6 +35,9 @@ $resultDiceSize: 50px
 img.die-background
   height: $resultDiceSize
   position: absolute
+
+.die-type
+  display: inline-block
 
 .die-side
   width: $resultDiceSize
@@ -65,5 +78,8 @@ img.die-result
   white-space: nowrap
   overflow: hidden
 
+input.btn-huge
+  font-size: 3em
+  padding: 1em
 
 
