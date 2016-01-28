@@ -14,6 +14,7 @@ angular.module("diceApp", [])
         }
     })
     .controller("NameController", function ($scope, nameService) {
+        $scope.playerName = "";
         $scope.$watch(
             function () {
                 return $scope.playerName
@@ -61,7 +62,9 @@ angular.module("diceApp", [])
             diceSelection.selected.proficiency = 0;
             diceSelection.selected.setback = 0;
         };
-
+        diceSelection.nameIsUnavailable = function() {
+            return nameService.playerName == "";
+        };
         diceSelection.roll = function () {
             var webSocket = createWebSocket("/roll");
             webSocket.onopen = function () {

@@ -20,7 +20,9 @@
 <div class="dice" ng-controller="DiceSelectionController as diceSelection">
     <div class="roll">
         <input type="button" name="roll" value="Roll"
-               ng-click="diceSelection.roll()"/>
+               ng-click="diceSelection.roll()"
+               ng-disabled="diceSelection.nameIsUnavailable()"
+        />
     </div>
     <div ng-repeat="dieType in diceSelection.types">
             <img ng-repeat="i in diceSelection.selectedDice(dieType)"
