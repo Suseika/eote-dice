@@ -1,3 +1,10 @@
+/**
+ * @param route Part of the URI after the host name and port, including "/"
+ * @returns {WebSocket}
+ */
+var createWebSocket = function (route) {
+    return new WebSocket('ws://' + window.location.hostname + ':3001' + route)
+};
 angular.module(
     "diceApp",
     [
@@ -5,14 +12,23 @@ angular.module(
     ]
     )
     .factory("IncomingThrows", function ($websocket) {
-        var dataStream = $websocket('ws://' + window.location.hostname + ':3001/throws');
+        var dataStream = createWebSocket("/newThrows");
         var throws = [];
 
-        dataStream.onMessage(function (message) {
-            throws.push(JSON.parse(message.data));
-        });
+        dataStream.onmessage = function (message) {
+            var items = JSON.parse(message.data);
+            throws.push(items);
+            console.log("incoming message:");
+            console.log(items)
+        };
+
         return {
             throws: throws
+        }
+    })
+    .service('history', function () {
+        return {
+            throwResults: []
         }
     })
     .service('nameService', function () {
@@ -30,7 +46,7 @@ angular.module(
             }
         )
     })
-    .controller("DiceSelectionController", function ($scope, nameService, IncomingThrows) {
+    .controller("DiceSelectionController", function ($scope, nameService, IncomingThrows, history) {
         var diceSelection = this;
         diceSelection.types = [
             "ability",
@@ -68,7 +84,17 @@ angular.module(
             diceSelection.selected.proficiency = 0;
             diceSelection.selected.setback = 0;
         };
+
         diceSelection.roll = function () {
-            console.log(nameService.playerName + " rolls")
+            var webSocket = createWebSocket("/roll");
+            webSocket.onopen = function () {
+                webSocket.send(JSON.stringify(diceSelection.selected));
+            };
+            webSocket.onmessage = function (event) {
+                var thorResultsFromServer = JSON.parse(event.data);
+                history.throwResults = history.throwResults.concat(thorResultsFromServer);
+                webSocket.close()
+            };
+            console.log(nameService.playerName + " rolls");
         };
     });
