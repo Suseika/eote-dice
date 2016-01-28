@@ -1,5 +1,5 @@
 original
 node_modules
 .idea
-public/stylesheets/*css
-public/stylesheets/*css.map
+public/stylesheets/style.css
+public/stylesheets/style.css.map
