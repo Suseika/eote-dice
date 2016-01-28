@@ -15,7 +15,7 @@
 <body>
 <div class="main">
     <div class="content">
-        <div class="player_name form-group"
+        <div class="player-name form-group"
              ng-controller="NameController as nameController">
             <input type="text"
                    class="form-control"
@@ -33,7 +33,7 @@
                        ng-disabled="diceSelection.rollIsDisabled()"/>
             <input type="button"
                    value="Reset"
-                   class="btn btn-default btn-huge"
+                   class="btn btn-default btn-big"
                    ng-click="diceSelection.resetAll()"/>
             </div>
             <div ng-repeat="dieType in diceSelection.types" class="die-type">
