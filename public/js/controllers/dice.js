@@ -62,8 +62,21 @@ angular.module("diceApp", [])
             diceSelection.selected.proficiency = 0;
             diceSelection.selected.setback = 0;
         };
-        diceSelection.nameIsUnavailable = function() {
+        diceSelection.nameIsUnavailable = function () {
             return nameService.playerName == "";
+        };
+        diceSelection.rollIsDisabled = function () {
+            return diceSelection.nameIsUnavailable()
+                || !diceSelection.anyDiceAreSelected()
+        };
+        diceSelection.anyDiceAreSelected = function () {
+            return _.values(diceSelection.selected)
+                    .reduce(
+                        function (a, b) {
+                            return a + b
+                        },
+                        0
+                    ) > 0
         };
         diceSelection.roll = function () {
             var webSocket = createWebSocket("/roll");

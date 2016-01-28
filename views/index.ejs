@@ -21,7 +21,7 @@
     <div class="roll">
         <input type="button" name="roll" value="Roll"
                ng-click="diceSelection.roll()"
-               ng-disabled="diceSelection.nameIsUnavailable()"
+               ng-disabled="diceSelection.rollIsDisabled()"
         />
     </div>
     <div ng-repeat="dieType in diceSelection.types">
