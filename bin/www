@@ -119,9 +119,13 @@ wss.on('connection', function connection(ws) {
   });
 });
 
+var EffectiveResult = require('../eote-model/dice/EffectiveResult');
+
 function diceThrowResult(diceThrowRequest) {
+  var rolls = DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingRolls();
   return {
     playerName: diceThrowRequest.playerName,
-    rolls: DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingRolls()
+    rolls: rolls,
+    effectiveResult: new EffectiveResult(rolls)
   };
 }
