@@ -1,6 +1,5 @@
-var Effect = function (basename, name) {
+var Effect = function (basename) {
     this.basename = basename;
-    this.name = name;
 };
 
 module.exports = Effect;
