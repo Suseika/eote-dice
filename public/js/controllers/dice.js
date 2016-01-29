@@ -178,13 +178,14 @@ angular.module("diceApp", [])
             return historyService.throwResults
                 .slice(0)
                 .reverse()
-                .filter(function (result) {
-                    return result.secret == false || result.playerName == nameService.playerName
-                })
+                .filter(history.isVisible);
+        };
+        history.isVisible = function (result) {
+            return result.secret == false || result.playerName == nameService.playerName
         };
         history.lastThrow = function () {
-            var throwResult = historyService.throwResults[historyService.throwResults.length - 1]
-            console.log(throwResult)
-            return throwResult;
+            return historyService.throwResults
+                .filter(history.isVisible)
+                .pop()
         };
     });
