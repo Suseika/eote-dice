@@ -56,10 +56,10 @@ angular.module("diceApp", [])
             diceSelection.selected[dieType] = index + 1;
         };
         diceSelection.selectDiceOrReset = function (dieType, index) {
-            if (diceSelection.selected[dieType] == index) {
-                diceSelection.selectDice(dieType, index);
-            } else {
+            if (diceSelection.selected[dieType] == index + 1) {
                 diceSelection.resetRow(dieType);
+            } else {
+                diceSelection.selectDice(dieType, index);
             }
         };
         diceSelection.selectedDice = function (dieType) {
