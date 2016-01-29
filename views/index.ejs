@@ -38,17 +38,16 @@
                            ng-click="diceSelection.secretRoll()"
                            ng-disabled="diceSelection.rollIsDisabled()"/>
                     <input type="button"
+                           value="Clear history"
+                           class="btn btn-default"
+                           ng-click="diceSelection.clearHistory()"
+                           ng-disabled="!diceSelection.hasAnyHistoryEntries()"
+                           />
+                    <input type="button"
                            value="Reset dice"
                            class="btn btn-default btn-big"
                            ng-click="diceSelection.resetAll()"
                            ng-disabled="!diceSelection.anyDiceAreSelected()"/>
-                    <input type="button"
-                           value="Clear history"
-                           class="but btn-default"
-                           ng-click="diceSelection.clearHistory()"
-                           ng-disabled="diceSelection.hasAnyHistoryEntires()"
-                    />
-
                 </div>
             </div>
             <div class="dice">

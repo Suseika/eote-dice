@@ -10,6 +10,11 @@ angular.module("diceApp", [])
     .service('nameService', function () {
         return {}
     })
+    .service('historyService', function () {
+        return {
+            throwResults: []
+        }
+    })
     .controller("NameController", function ($scope, nameService) {
         var savedName = localStorage.getItem("playerName");
         if (!savedName) {
@@ -27,7 +32,7 @@ angular.module("diceApp", [])
             }
         )
     })
-    .controller("DiceSelectionController", function ($scope, nameService) {
+    .controller("DiceSelectionController", function ($scope, nameService, historyService) {
         var diceSelection = this;
         diceSelection.types = [
             "ability",
@@ -116,7 +121,8 @@ angular.module("diceApp", [])
             diceSelection.selected[dieType] = 0;
         };
         diceSelection.hasAnyHistoryEntries = function () {
-            return history.throwResults.length == 0
+            console.log(historyService.throwResults);
+            return historyService.throwResults.length > 0
         };
         diceSelection.clearHistory = function () {
             var confirmationCode = "these aren't the rolls you're looking for";
@@ -132,13 +138,13 @@ angular.module("diceApp", [])
                     webSocket
                         .send(JSON.stringify({clearHistory: 1}));
                     webSocket.close();
+                    location.reload();
                 }
             }
         }
     })
-    .controller("HistoryController", function ($scope, nameService) {
+    .controller("HistoryController", function ($scope, historyService) {
         var history = this;
-        history.throwResults = [];
 
         var dataStream = createWebSocket("/newThrows");
 
@@ -146,10 +152,10 @@ angular.module("diceApp", [])
             var data = JSON.parse(message.data);
             if (data.hasOwnProperty("archive")) {
                 data.archive.forEach(function (entry) {
-                    history.throwResults.push(entry);
+                    historyService.throwResults.push(entry);
                 })
             } else {
-                history.throwResults.push(data);
+                historyService.throwResults.push(data);
             }
             $scope.$apply();
         };
@@ -169,7 +175,7 @@ angular.module("diceApp", [])
             );
         };
         history.visibleThrowResults = function () {
-            return history.throwResults
+            return historyService.throwResults
                 .slice(0)
                 .reverse()
                 .filter(function (result) {
