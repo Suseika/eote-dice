@@ -176,7 +176,7 @@ angular.module("diceApp", [])
         };
         history.visibleThrowResults = function () {
             return historyService.throwResults
-                .slice(0)
+                .slice(0, -1)
                 .reverse()
                 .filter(history.isVisible);
         };
