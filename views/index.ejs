@@ -75,29 +75,32 @@
             </div>
         </div>
         <div class="history" ng-controller="HistoryController as history">
-            <div class="last-throw"></div>
             <div class="previous-throws">
-                <div class="old-throw"
-                     ng-repeat="throwResult in history.visibleThrowResults() track by $index">
-                    <div
-                        class="result-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
-                    <div class="die-side"
-                         ng-repeat="dieSide in throwResult.rolledSides">
-                        <img class="die-background"
-                             ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
-                        <div
-                            class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
-                            <img class="die-effect"
-                                 ng-repeat="effect in dieSide.effects"
-                                 ng-src="images/effects/{{effect.basename}}.png"/>
-                        </div>
-                    </div>
-                    <div class="die-effects">
-                        <img class="die-effect"
-                             ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
-                             ng-src="images/effects/{{effectName}}.png"/>
-                    </div>
-                </div>
+                <table>
+                    <tr class="old-throw" ng-repeat="throwResult in history.visibleThrowResults() track by $index">
+                        <td>
+                            <div class="old-throw-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
+                        </td>
+                        <td class="old-throw-dice">
+                            <div class="die-side"
+                                 ng-repeat="dieSide in throwResult.rolledSides">
+                                <img class="die-background"
+                                     ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
+                                <div
+                                    class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                                    <img class="die-effect"
+                                         ng-repeat="effect in dieSide.effects"
+                                         ng-src="images/effects/{{effect.basename}}.png"/>
+                                </div>
+                            </div>
+                            <div class="die-effects">
+                                <img class="die-effect"
+                                     ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
+                                     ng-src="images/effects/{{effectName}}.png"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
