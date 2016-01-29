@@ -77,8 +77,8 @@
             <div class="previous-throws">
                 <table>
                     <tr class="old-throw" ng-repeat="throwResult in history.visibleThrowResults() track by $index">
-                        <td>
-                            <div class="old-throw-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
+                        <td class="old-throw-player-name secret-{{throwResult.secret}}">
+                            {{throwResult.playerName}}
                         </td>
                         <td class="old-throw-dice">
                             <div class="die-side"

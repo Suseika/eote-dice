@@ -143,7 +143,7 @@ angular.module("diceApp", [])
             }
         }
     })
-    .controller("HistoryController", function ($scope, historyService) {
+    .controller("HistoryController", function ($scope, historyService, nameService) {
         var history = this;
 
         var dataStream = createWebSocket("/newThrows");
