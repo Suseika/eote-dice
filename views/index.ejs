@@ -43,10 +43,10 @@
                            ng-click="diceSelection.resetAll()"
                            ng-disabled="!diceSelection.anyDiceAreSelected()"/>
                     <!--<input type="button"-->
-                           <!--value="Clear history"-->
-                           <!--class="btn btn-default"-->
-                           <!--ng-click="diceSelection.clearHistory()"-->
-                           <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
+                    <!--value="Clear history"-->
+                    <!--class="btn btn-default"-->
+                    <!--ng-click="diceSelection.clearHistory()"-->
+                    <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
                     <!--/>-->
                 </div>
             </div>
@@ -83,9 +83,13 @@
                         <td class="old-throw-player-name secret-{{throwResult.secret}}">
                             {{throwResult.playerName}}
                         </td>
-                        <td class="old-throw-dice">
+                        <td
+                            ng-click="hover = !hover"
+                            ng-mouseleave="hover = false"
+                            class="old-throw-dice">
                             <div class="die-sides"
-                                 ng-class="{hidden: !$first}">
+                                 ng-class="{hidden: !$first && !hover}"
+                            >
                                 <div class="die-side"
                                      ng-repeat="dieSide in throwResult.rolledSides">
                                     <img class="die-background"
