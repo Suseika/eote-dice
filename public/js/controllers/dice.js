@@ -47,8 +47,15 @@ angular.module("diceApp", [])
             proficiency: 0,
             setback: 0
         };
-        diceSelection.selectDice = function (typeName, index) {
-            diceSelection.selected[typeName] = index + 1;
+        diceSelection.selectDice = function (dieType, index) {
+            diceSelection.selected[dieType] = index + 1;
+        };
+        diceSelection.selectDiceOrReset = function (dieType, index) {
+            if (diceSelection.selected[dieType] == index) {
+                diceSelection.selectDice(dieType, index);
+            } else {
+                diceSelection.resetRow(dieType);
+            }
         };
         diceSelection.selectedDice = function (dieType) {
             return _.range(0, diceSelection.selected[dieType])
