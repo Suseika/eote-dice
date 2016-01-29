@@ -43,10 +43,10 @@
                            ng-click="diceSelection.resetAll()"
                            ng-disabled="!diceSelection.anyDiceAreSelected()"/>
                     <!--<input type="button"-->
-                           <!--value="Clear history"-->
-                           <!--class="btn btn-default"-->
-                           <!--ng-click="diceSelection.clearHistory()"-->
-                           <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
+                    <!--value="Clear history"-->
+                    <!--class="btn btn-default"-->
+                    <!--ng-click="diceSelection.clearHistory()"-->
+                    <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
                     <!--/>-->
                 </div>
             </div>
@@ -78,22 +78,30 @@
         <div class="history" ng-controller="HistoryController as history">
             <div class="previous-throws">
                 <table>
-                    <tr class="old-throw" ng-repeat="throwResult in history.visibleThrowResults() track by $index">
+                    <tr class="old-throw"
+                        ng-repeat="throwResult in history.visibleThrowResults() track by $index">
                         <td class="old-throw-player-name secret-{{throwResult.secret}}">
                             {{throwResult.playerName}}
                         </td>
-                        <td class="old-throw-dice">
-                            <div class="die-side"
-                                 ng-repeat="dieSide in throwResult.rolledSides">
-                                <img class="die-background"
-                                     draggable="false"
-                                     ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
-                                <div
-                                    class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
-                                    <img class="die-effect"
+                        <td
+                            ng-click="hover = !hover"
+                            ng-mouseleave="hover = false"
+                            class="old-throw-dice">
+                            <div class="die-sides"
+                                 ng-class="{hidden: !$first && !hover}"
+                            >
+                                <div class="die-side"
+                                     ng-repeat="dieSide in throwResult.rolledSides">
+                                    <img class="die-background"
                                          draggable="false"
-                                         ng-repeat="effect in dieSide.effects"
-                                         ng-src="images/effects/{{effect.basename}}.png"/>
+                                         ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
+                                    <div
+                                        class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                                        <img class="die-effect"
+                                             draggable="false"
+                                             ng-repeat="effect in dieSide.effects"
+                                             ng-src="images/effects/{{effect.basename}}.png"/>
+                                    </div>
                                 </div>
                             </div>
                             <div class="die-effects">
