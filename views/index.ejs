@@ -30,7 +30,12 @@
                     <input type="button"
                            class="btn btn-default btn-huge"
                            value="Roll"
-                           ng-click="diceSelection.roll()"
+                           ng-click="diceSelection.openRoll()"
+                           ng-disabled="diceSelection.rollIsDisabled()"/>
+                    <input type="button"
+                           class="btn btn-default btn-huge"
+                           value="Secret roll"
+                           ng-click="diceSelection.secretRoll()"
                            ng-disabled="diceSelection.rollIsDisabled()"/>
                     <input type="button"
                            value="Reset"
@@ -65,9 +70,9 @@
             <div class="last-throw"></div>
             <div class="previous-throws">
                 <div class="old-throw"
-                     ng-repeat="throwResult in history.throwResults.slice(0).reverse() track by $index">
+                     ng-repeat="throwResult in history.visibleThrowResults() track by $index">
                     <div
-                        class="result-player-name">{{throwResult.playerName}}</div>
+                        class="result-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
                     <div class="die-side"
                          ng-repeat="dieSide in throwResult.rolledSides">
                         <img class="die-background"

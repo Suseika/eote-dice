@@ -81,28 +81,35 @@ angular.module("diceApp", [])
                         0
                     ) > 0
         };
-        diceSelection.roll = function () {
+        diceSelection.openRoll = function () {
+            diceSelection.roll(false);
+        };
+        diceSelection.secretRoll = function () {
+            diceSelection.roll(true);
+        };
+        diceSelection.roll = function (secret) {
             var webSocket = createWebSocket("/roll");
             webSocket.onopen = function () {
                 webSocket.send(
                     JSON.stringify(
                         {
                             playerName: nameService.playerName,
-                            diceThrow: diceSelection.selected
+                            diceThrow: diceSelection.selected,
+                            secret: secret
                         }
                     )
                 );
                 webSocket.close()
             };
         };
-        diceSelection.rowIsEmpty = function(dieType) {
+        diceSelection.rowIsEmpty = function (dieType) {
             return diceSelection.selected[dieType] == 0;
         };
-        diceSelection.resetRow = function(dieType) {
+        diceSelection.resetRow = function (dieType) {
             diceSelection.selected[dieType] = 0;
         }
     })
-    .controller("HistoryController", function ($scope) {
+    .controller("HistoryController", function ($scope, nameService) {
         var history = this;
         history.throwResults = [];
 
@@ -111,7 +118,7 @@ angular.module("diceApp", [])
         dataStream.onmessage = function (message) {
             var data = JSON.parse(message.data);
             if (data.hasOwnProperty("archive")) {
-                data.archive.forEach(function(entry) {
+                data.archive.forEach(function (entry) {
                     history.throwResults.push(entry);
                 })
             } else {
@@ -122,6 +129,7 @@ angular.module("diceApp", [])
         setInterval(function () {
             dataStream.send("{\"ping\": 1}")
         }, 15000);
+
         history.totalEffects = function (throwResult) {
             return _.flatten(
                 _.keys(throwResult.effects)
@@ -133,4 +141,12 @@ angular.module("diceApp", [])
                     })
             );
         };
+        history.visibleThrowResults = function () {
+            return history.throwResults
+                .slice(0)
+                .reverse()
+                .filter(function (result) {
+                    return result.secret == false || result.playerName == nameService.playerName
+                })
+        }
     });
