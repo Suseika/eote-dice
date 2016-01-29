@@ -25,7 +25,7 @@ node bin/www
 
 # Deployment to heroku
 
-Using [heroku toolbelt](https://toolbelt.heroku.com/)
+Using [heroku toolbelt](https://toolbelt.heroku.com/):
 
 ```sh
 git clone https://github.com/Suseika/eote-dice
