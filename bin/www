@@ -136,6 +136,7 @@ function diceThrowResult(diceThrowRequest) {
   return {
     playerName: diceThrowRequest.playerName,
     rolledSides: rolledSides,
-    effects: new EffectiveResult(rolledSides)
+    effects: new EffectiveResult(rolledSides),
+    secret: diceThrowRequest.secret
   };
 }
