@@ -41,6 +41,13 @@
                            value="Reset"
                            class="btn btn-default btn-big"
                            ng-click="diceSelection.resetAll()"/>
+                    <input type="button"
+                           value="Clear history"
+                           class="but btn-default"
+                           ng-click="diceSelection.clearHistory()"
+                           ng-disabled="diceSelection.hasAnyHistoryEntires()"
+                    />
+
                 </div>
             </div>
             <div class="dice">

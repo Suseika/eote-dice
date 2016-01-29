@@ -114,13 +114,15 @@ function listensToNewThrows(client) {
 
 wss.on('connection', function connection(ws) {
   if (listensToNewThrows(ws)) {
-    ws.send(JSON.stringify(history));
+    sendHistory(ws);
   }
 
   ws.on('message', function incoming(message) {
     var data = JSON.parse(message);
     if (data.ping == 1) {
       // Do nothing, it is a ping for keeping session alive
+    } else if (data.clearHistory == 1) {
+      history.clear();
     } else {
       var throwResult = diceThrowResult(data);
       history.addDiceThrowResult(throwResult);
@@ -128,6 +130,10 @@ wss.on('connection', function connection(ws) {
     }
   });
 });
+
+function sendHistory(client) {
+  client.send(JSON.stringify(history));
+}
 
 var EffectiveResult = require('../eote-model/dice/EffectiveResult');
 
