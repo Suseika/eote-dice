@@ -46,6 +46,11 @@
                          ng-click="diceSelection.selectDice(dieType, i)"
                          class="unselected"
                     />
+                    <input type="button"
+                           ng-click="diceSelection.resetRow(dieType)"
+                           value="Reset"
+                           ng-disabled="diceSelection.rowIsEmpty(dieType)"
+                           class="btn btn-default"/>
             </div>
             <div class="clearfix"></div>
         </div>
