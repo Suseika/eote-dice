@@ -35,21 +35,21 @@ angular.module("diceApp", [])
     .controller("DiceSelectionController", function ($scope, nameService, historyService) {
         var diceSelection = this;
         diceSelection.types = [
+            "force",
+            "proficiency",
             "ability",
             "boost",
             "challenge",
             "difficulty",
-            "force",
-            "proficiency",
             "setback"
         ];
         diceSelection.selected = {
+            force: 0,
+            proficiency: 0,
             ability: 0,
             boost: 0,
             challenge: 0,
             difficulty: 0,
-            force: 0,
-            proficiency: 0,
             setback: 0
         };
         diceSelection.selectDice = function (dieType, index) {
@@ -69,12 +69,12 @@ angular.module("diceApp", [])
             return _.range(diceSelection.selected[dieType], 5)
         };
         diceSelection.resetAll = function () {
+            diceSelection.selected.force = 0;
+            diceSelection.selected.proficiency = 0;
             diceSelection.selected.ability = 0;
             diceSelection.selected.boost = 0;
             diceSelection.selected.challenge = 0;
             diceSelection.selected.difficulty = 0;
-            diceSelection.selected.force = 0;
-            diceSelection.selected.proficiency = 0;
             diceSelection.selected.setback = 0;
         };
         diceSelection.nameIsUnavailable = function () {
