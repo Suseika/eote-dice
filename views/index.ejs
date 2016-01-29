@@ -56,7 +56,7 @@
                         <img
                             ng-repeat="i in diceSelection.selectedDice(dieType)"
                             ng-src="/images/dice/{{dieType}}.png"
-                            ng-click="diceSelection.selectDice(dieType, i)"
+                            ng-click="diceSelection.selectDiceOrReset(dieType, i)"
                         />
                         <img
                             ng-repeat="i in diceSelection.unselectedDice(dieType)"
