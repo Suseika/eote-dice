@@ -1,4 +1,4 @@
-.main
+.content
   width: 700px
   margin: auto
   box-shadow: #111 0px 0px 20px
@@ -10,42 +10,8 @@
   -ms-transform: translateY(-50%)
   transform: translateY(-50%)
 
-@mixin sticky_footer($footer-height)
-  html, body
-    height: 100%
-  .main
-    min-height: 100%
-    overflow-x: hidden
-  .content
-    padding: 1em 1em $footer-height
-
-  .footer
-    clear: both
-    position: relative
-    margin-top: $footer-height * -1
-    height: $footer-height
-    overflow: visible
-
-// Unstick the footer
-@mixin unsticky_footer()
-  html, body
-    height: auto
-  .main
-    min-height: none
-  .content
-    padding-bottom: 0
-  .footer
-    margin-top: 1em
-    height: auto
-
-@include sticky_footer(20px)
-
-.footer
-  background-color: #485563
-
 .history
-  overflow-y: scroll
-  height: 400px
+  height: auto
 
 .buttons input
   display: block
@@ -99,12 +65,9 @@ img.die-background
   width: 200px
   height: 100%
   text-align: center
-  display: block
   line-height: $resultDiceSize
   text-overflow: ellipsis
   white-space: nowrap
-  overflow: hidden
-  float: left
   font-size: 1.3em
 
 input.btn-huge
@@ -122,7 +85,7 @@ input.btn-big
   background-color: #3A4550
 
 .die-effects
-  display: inline-block
+  display: block
 
 .die-effect
   height: ($resultDiceSize)-20px
@@ -134,6 +97,10 @@ input.btn-big
 .secret-true
   opacity: 0.3
 
+.previous-throws
+  overflow-y: scroll
+  height: 300px
+
 .previous-throws > table
   width: 100%
 
@@ -143,12 +110,23 @@ input.btn-big
 td.old-throw-dice
   width: 100%
   cursor: pointer
+  padding-left: 20px !important
 
 .hidden
   display: none
 
 .die-sides
-  display: inline-block
+  display: block
 
 .btn-reset-row
   height: $resultDiceSize
+
+.last-throw
+  text-align: center
+  padding: 0px 0px 30px 0px
+
+.last-throw-player-name
+  font-size: 2em
+
+.controls
+  padding: 10px

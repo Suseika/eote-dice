@@ -13,112 +13,130 @@
     <link rel='stylesheet' href='/stylesheets/bootstrap-superhero.min.css'/>
 </head>
 <body>
-<div class="main">
-    <div class="content">
-        <div class="controls"
-             ng-controller="DiceSelectionController as diceSelection">
-            <div class="inputs">
-                <div class="player-name form-group"
-                     ng-controller="NameController as nameController">
-                    <input type="text"
-                           class="form-control"
-                           ng-model="playerName"
-                           placeholder="Меня зовут"
-                           name="playerName"/>
-                </div>
-                <div class="buttons">
-                    <input type="button"
-                           class="btn btn-default btn-huge"
-                           value="Roll"
-                           ng-click="diceSelection.openRoll()"
-                           ng-disabled="diceSelection.rollIsDisabled()"/>
-                    <input type="button"
-                           class="btn btn-default btn-huge"
-                           value="Secret roll"
-                           ng-click="diceSelection.secretRoll()"
-                           ng-disabled="diceSelection.rollIsDisabled()"/>
-                    <input type="button"
-                           value="Reset dice"
-                           class="btn btn-default btn-big"
-                           ng-click="diceSelection.resetAll()"
-                           ng-disabled="!diceSelection.anyDiceAreSelected()"/>
-                    <!--<input type="button"-->
-                    <!--value="Clear history"-->
-                    <!--class="btn btn-default"-->
-                    <!--ng-click="diceSelection.clearHistory()"-->
-                    <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
-                    <!--/>-->
-                </div>
+<div class="content">
+    <div class="controls"
+         ng-controller="DiceSelectionController as diceSelection">
+        <div class="inputs">
+            <div class="player-name form-group"
+                 ng-controller="NameController as nameController">
+                <input type="text"
+                       class="form-control"
+                       ng-model="playerName"
+                       placeholder="Меня зовут"
+                       name="playerName"/>
             </div>
-            <div class="dice">
-                <div ng-repeat="dieType in diceSelection.types"
-                     class="die-type">
-                        <img
-                            ng-repeat="i in diceSelection.selectedDice(dieType)"
-                            ng-src="/images/dice/{{dieType}}.png"
-                            ng-click="diceSelection.selectDiceOrReset(dieType, i)"
-                            draggable="false"
-                        />
-                        <img
-                            ng-repeat="i in diceSelection.unselectedDice(dieType)"
-                            ng-src="/images/dice/{{dieType}}.png"
-                            ng-click="diceSelection.selectDice(dieType, i)"
-                            class="unselected"
-                            draggable="false"
-                        />
-                        <input type="button"
-                               ng-click="diceSelection.resetRow(dieType)"
-                               value="Reset"
-                               ng-disabled="diceSelection.rowIsEmpty(dieType)"
-                               class="btn btn-default btn-reset-row"/>
-                </div>
-                <div class="clearfix"></div>
+            <div class="buttons">
+                <input type="button"
+                       class="btn btn-default btn-huge"
+                       value="Roll"
+                       ng-click="diceSelection.openRoll()"
+                       ng-disabled="diceSelection.rollIsDisabled()"/>
+                <input type="button"
+                       class="btn btn-default btn-huge"
+                       value="Secret roll"
+                       ng-click="diceSelection.secretRoll()"
+                       ng-disabled="diceSelection.rollIsDisabled()"/>
+                <input type="button"
+                       value="Reset dice"
+                       class="btn btn-default btn-big"
+                       ng-click="diceSelection.resetAll()"
+                       ng-disabled="!diceSelection.anyDiceAreSelected()"/>
+                <!--<input type="button"-->
+                <!--value="Clear history"-->
+                <!--class="btn btn-default"-->
+                <!--ng-click="diceSelection.clearHistory()"-->
+                <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
+                <!--/>-->
             </div>
         </div>
-        <div class="history" ng-controller="HistoryController as history">
-            <div class="previous-throws">
-                <table>
-                    <tr class="old-throw"
-                        ng-repeat="throwResult in history.visibleThrowResults() track by $index">
-                        <td class="old-throw-player-name secret-{{throwResult.secret}}">
-                            {{throwResult.playerName}}
-                        </td>
-                        <td
-                            ng-click="hover = !hover"
-                            ng-mouseleave="hover = false"
-                            class="old-throw-dice">
-                            <div class="die-sides"
-                                 ng-class="{hidden: !$first && !hover}"
-                            >
-                                <div class="die-side"
-                                     ng-repeat="dieSide in throwResult.rolledSides">
-                                    <img class="die-background"
-                                         draggable="false"
-                                         ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
-                                    <div
-                                        class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
-                                        <img class="die-effect"
-                                             draggable="false"
-                                             ng-repeat="effect in dieSide.effects"
-                                             ng-src="images/effects/{{effect.basename}}.png"/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="die-effects">
-                                <img class="die-effect"
-                                     draggable="false"
-                                     ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
-                                     ng-src="images/effects/{{effectName}}.png"/>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+        <div class="dice">
+            <div ng-repeat="dieType in diceSelection.types"
+                 class="die-type">
+                    <img
+                        ng-repeat="i in diceSelection.selectedDice(dieType)"
+                        ng-src="/images/dice/{{dieType}}.png"
+                        ng-click="diceSelection.selectDiceOrReset(dieType, i)"
+                        draggable="false"
+                    />
+                    <img
+                        ng-repeat="i in diceSelection.unselectedDice(dieType)"
+                        ng-src="/images/dice/{{dieType}}.png"
+                        ng-click="diceSelection.selectDice(dieType, i)"
+                        class="unselected"
+                        draggable="false"
+                    />
+                    <input type="button"
+                           ng-click="diceSelection.resetRow(dieType)"
+                           value="Reset"
+                           ng-disabled="diceSelection.rowIsEmpty(dieType)"
+                           class="btn btn-default btn-reset-row"/>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
-</div>
-<div class="footer">
-    <a href="https://github.com/Suseika/eote-dice">https://github.com/Suseika/eote-dice</a>
+    <div class="history" ng-controller="HistoryController as history">
+        <div class="last-throw">
+            <div class="last-throw-player-name secret-{{throwResult.secret}}">{{history.lastThrow().playerName}}</div>
+            <div class="die-sides">
+                <div class="die-effects">
+                    <img class="die-effect"
+                         draggable="false"
+                         ng-repeat="effectName in history.totalEffects(history.lastThrow()) track by $index"
+                         ng-src="images/effects/{{effectName}}.png"/>
+                </div>
+                <div class="die-side"
+                     ng-repeat="dieSide in history.lastThrow().rolledSides">
+                    <img class="die-background"
+                         draggable="false"
+                         ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
+                    <div
+                        class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                        <img class="die-effect"
+                             draggable="false"
+                             ng-repeat="effect in dieSide.effects"
+                             ng-src="images/effects/{{effect.basename}}.png"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="previous-throws">
+            <table>
+                <tr class="old-throw"
+                    ng-repeat="throwResult in history.visibleThrowResults() track by $index">
+                    <td>
+                        <div class="old-throw-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
+                    </td>
+                    <td
+                        ng-click="reveal = !reveal"
+                        ng-mouseleave="reveal = false"
+                        class="old-throw-dice">
+                        <div class="die-effects">
+                            <img class="die-effect"
+                                 draggable="false"
+                                 ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
+                                 ng-src="images/effects/{{effectName}}.png"/>
+                        </div>
+                        <div class="die-sides"
+                             ng-class="{hidden: !reveal}">
+                            <div class="die-side"
+                                 ng-repeat="dieSide in throwResult.rolledSides">
+                                <img class="die-background"
+                                     draggable="false"
+                                     ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
+                                <div
+                                    class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                                    <img class="die-effect"
+                                         draggable="false"
+                                         ng-repeat="effect in dieSide.effects"
+                                         ng-src="images/effects/{{effect.basename}}.png"/>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
 </body>
 </html>

@@ -181,5 +181,10 @@ angular.module("diceApp", [])
                 .filter(function (result) {
                     return result.secret == false || result.playerName == nameService.playerName
                 })
-        }
+        };
+        history.lastThrow = function () {
+            var throwResult = historyService.throwResults[historyService.throwResults.length - 1]
+            console.log(throwResult)
+            return throwResult;
+        };
     });
