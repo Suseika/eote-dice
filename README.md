@@ -1,6 +1,6 @@
 # eote-dice
 
-Multiplayer dice throw simulator for Edge of the Empire role-playing system.
+Multiplayer dice roll simulator for Edge of the Empire role-playing system.
 
 - Allows many players to see each other's rolls;
 - Maintains roll history;
