@@ -108,19 +108,20 @@ angular.module("diceApp", [])
         diceSelection.resetRow = function (dieType) {
             diceSelection.selected[dieType] = 0;
         };
-        diceSelection.hasAnyHistoryEntries = function() {
+        diceSelection.hasAnyHistoryEntries = function () {
             return history.throwResults.length == 0
         };
-        diceSelection.clearHistory = function() {
+        diceSelection.clearHistory = function () {
             var confirmationCode = "these aren't the rolls you're looking for";
             var actualCode = prompt(
-                "Danger zone!\n " +
-                "History is going to be cleared for everyone\n" +
-                    "to confirm this, type \""+confirmationCode+"\""
+                "Danger zone!\n" +
+                "History is going to be cleared for everyone.\n" +
+                "To confirm this, type the following:\n\n" +
+                "" + confirmationCode + ""
             );
             if (actualCode == confirmationCode) {
                 var webSocket = createWebSocket("/clearHistory");
-                webSocket.onopen = function() {
+                webSocket.onopen = function () {
                     webSocket
                         .send(JSON.stringify({clearHistory: 1}));
                     webSocket.close();
