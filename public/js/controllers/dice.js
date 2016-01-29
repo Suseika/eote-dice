@@ -95,6 +95,12 @@ angular.module("diceApp", [])
                 webSocket.close()
             };
         };
+        diceSelection.rowIsEmpty = function(dieType) {
+            return diceSelection.selected[dieType] == 0;
+        };
+        diceSelection.resetRow = function(dieType) {
+            diceSelection.selected[dieType] = 0;
+        }
     })
     .controller("HistoryController", function ($scope) {
         var history = this;
