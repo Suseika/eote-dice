@@ -6,6 +6,19 @@ var createWebSocket = function (route) {
     return new WebSocket(window.location.origin.replace('http', 'ws') + route)
 };
 
+/**
+ * Pings the application host periodically so the Heroky dyno it is running on
+ * doesn't die.
+ */
+var httpPing = function () {
+    var request = new XMLHttpRequest();
+    var address = window.location.protocol + "//" + window.location.host;
+    request.open("GET", address);
+    request.send(null);
+};
+
+setInterval(httpPing, 60000);
+
 angular.module("diceApp", [])
     .service('nameService', function () {
         return {}
@@ -164,6 +177,7 @@ angular.module("diceApp", [])
         }, 15000);
 
         history.totalEffects = function (throwResult) {
+            console.log(throwResult)
             return _.flatten(
                 _.keys(throwResult.effects)
                     .map(function (basename) {
