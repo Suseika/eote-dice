@@ -134,7 +134,6 @@ angular.module("diceApp", [])
             diceSelection.selected[dieType] = 0;
         };
         diceSelection.hasAnyHistoryEntries = function () {
-            console.log(historyService.throwResults);
             return historyService.throwResults.length > 0
         };
         diceSelection.clearHistory = function () {
@@ -177,7 +176,6 @@ angular.module("diceApp", [])
         }, 15000);
 
         history.totalEffects = function (throwResult) {
-            console.log(throwResult)
             return _.flatten(
                 _.keys(throwResult.effects)
                     .map(function (basename) {
