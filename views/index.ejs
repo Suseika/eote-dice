@@ -82,6 +82,7 @@
                     <img class="die-effect"
                          draggable="false"
                          ng-repeat="effectName in history.totalEffects(history.lastThrow()) track by $index"
+                         title="{{effectName}}"
                          ng-src="images/effects/{{effectName}}.png"/>
                 </div>
                 <div class="die-side"
@@ -114,6 +115,7 @@
                             <img class="die-effect"
                                  draggable="false"
                                  ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
+                                 title="{{effectName}}"
                                  ng-src="images/effects/{{effectName}}.png"/>
                         </div>
                         <div class="die-sides"
