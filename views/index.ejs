@@ -103,13 +103,12 @@
         <div class="previous-throws">
             <table>
                 <tr class="old-throw"
-                    ng-repeat="throwResult in history.visibleThrowResults() track by $index">
+                    ng-repeat="throwResult in history.visibleThrowResults()">
                     <td>
                         <div class="old-throw-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
                     </td>
                     <td
                         ng-click="reveal = !reveal"
-                        ng-mouseleave="reveal = false"
                         class="old-throw-dice">
                         <div class="die-effects">
                             <img class="die-effect"
