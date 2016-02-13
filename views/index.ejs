@@ -2,11 +2,11 @@
 <html ng-app="diceApp">
 <head>
     <script
-        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+            src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+            src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script
-        src="https://cdn.rawgit.com/gdi2290/angular-websocket/v1.0.9/angular-websocket.min.js"></script>
+            src="https://cdn.rawgit.com/gdi2290/angular-websocket/v1.0.9/angular-websocket.min.js"></script>
     <script src="/js/controllers/dice.js"></script>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
@@ -32,7 +32,7 @@
                        ng-click="diceSelection.openRoll()"
                        ng-disabled="diceSelection.rollIsDisabled()"/>
                 <input type="button"
-                       class="btn btn-default btn-huge"
+                       class="btn btn-default btn-big"
                        value="Secret roll"
                        ng-click="diceSelection.secretRoll()"
                        ng-disabled="diceSelection.rollIsDisabled()"/>
@@ -47,36 +47,47 @@
                 <!--ng-click="diceSelection.clearHistory()"-->
                 <!--ng-disabled="!diceSelection.hasAnyHistoryEntries()"-->
                 <!--/>-->
+                <div class="d100-selection-wrap"
+                     ng-controller="DiceSelectionController as diceSelection"
+                >
+                    <input type="button"
+                           class="d100-selection btn btn-default"
+                           ng-click="diceSelection.d100Roll()"
+                           value="d100"
+                    />
+                </div>
             </div>
         </div>
         <div class="dice">
             <div ng-repeat="dieType in diceSelection.types"
                  class="die-type">
-                    <img
+                <img
                         ng-repeat="i in diceSelection.selectedDice(dieType)"
                         ng-src="/images/dice/{{dieType}}.png"
                         ng-click="diceSelection.selectDiceOrReset(dieType, i)"
                         draggable="false"
-                    />
-                    <img
+                />
+                <img
                         ng-repeat="i in diceSelection.unselectedDice(dieType)"
                         ng-src="/images/dice/{{dieType}}.png"
                         ng-click="diceSelection.selectDice(dieType, i)"
                         class="unselected"
                         draggable="false"
-                    />
-                    <input type="button"
-                           ng-click="diceSelection.resetRow(dieType)"
-                           value="Reset"
-                           ng-disabled="diceSelection.rowIsEmpty(dieType)"
-                           class="btn btn-default btn-reset-row"/>
+                />
+                <input type="button"
+                       ng-click="diceSelection.resetRow(dieType)"
+                       value="Reset"
+                       ng-disabled="diceSelection.rowIsEmpty(dieType)"
+                       class="btn btn-default btn-reset-row"/>
             </div>
             <div class="clearfix"></div>
         </div>
     </div>
     <div class="history" ng-controller="HistoryController as history">
         <div class="last-throw">
-            <div class="last-throw-player-name secret-{{history.lastThrow().secret}}">{{history.lastThrow().playerName}}</div>
+            <div class="last-throw-player-name secret-{{history.lastThrow().secret}}">
+                {{history.lastThrow().playerName}}
+            </div>
             <div class="die-sides">
                 <div class="die-effects">
                     <img class="die-effect"
@@ -84,6 +95,10 @@
                          ng-repeat="effectName in history.totalEffects(history.lastThrow()) track by $index"
                          title="{{effectName}}"
                          ng-src="images/effects/{{effectName}}.png"/>
+                    <div class="d100-result"
+                         ng-class="{hidden: !(history.lastThrow().d100 >= 0)}"
+                    >{{history.lastThrow().d100}}
+                    </div>
                 </div>
                 <div class="die-side"
                      ng-repeat="dieSide in history.lastThrow().rolledSides">
@@ -91,7 +106,7 @@
                          draggable="false"
                          ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
                     <div
-                        class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                            class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
                         <img class="die-effect"
                              draggable="false"
                              ng-repeat="effect in dieSide.effects"
@@ -105,17 +120,23 @@
                 <tr class="old-throw"
                     ng-repeat="throwResult in history.visibleThrowResults()">
                     <td>
-                        <div class="old-throw-player-name secret-{{throwResult.secret}}">{{throwResult.playerName}}</div>
+                        <div class="old-throw-player-name secret-{{throwResult.secret}}">
+                            {{throwResult.playerName}}
+                        </div>
                     </td>
                     <td
-                        ng-click="reveal = !reveal"
-                        class="old-throw-dice">
+                            ng-click="reveal = !reveal"
+                            class="old-throw-dice">
                         <div class="die-effects">
                             <img class="die-effect"
                                  draggable="false"
                                  ng-repeat="effectName in history.totalEffects(throwResult) track by $index"
                                  title="{{effectName}}"
                                  ng-src="images/effects/{{effectName}}.png"/>
+                            <div class="d100-result"
+                                 ng-class="{hidden: throwResult.d100 == -1}"
+                            >{{throwResult.d100}}
+                            </div>
                         </div>
                         <div class="die-sides"
                              ng-class="{hidden: !reveal}">
@@ -125,7 +146,7 @@
                                      draggable="false"
                                      ng-src="images/dice_backgrounds/{{dieSide.dieName}}.png"/>
                                 <div
-                                    class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
+                                        class="die-result-wrap die-result-wrap-{{dieSide.dieName}}">
                                     <img class="die-effect"
                                          draggable="false"
                                          ng-repeat="effect in dieSide.effects"

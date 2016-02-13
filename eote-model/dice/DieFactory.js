@@ -5,6 +5,7 @@ var Difficulty = require("./Difficulty");
 var Force = require("./Force");
 var Proficiency = require("./Proficiency");
 var Setback = require("./Setback");
+var D100 = require("./D100");
 
 var DieFactory = function() {
 
@@ -28,6 +29,8 @@ DieFactory.prototype.createDie = function(name) {
         return new Proficiency()
     } else if (name == "setback") {
         return new Setback()
+    } else if (name == "d100") {
+        return new D100()
     } else {
         throw new Error("Illegal die name "+name)
     }

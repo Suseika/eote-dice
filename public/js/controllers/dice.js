@@ -89,6 +89,9 @@ angular.module("diceApp", [])
             diceSelection.selected.challenge = 0;
             diceSelection.selected.difficulty = 0;
             diceSelection.selected.setback = 0;
+            console.log("before "+diceSelection.selected.d100)
+            diceSelection.selected.d100 = false;
+            console.log("after "+diceSelection.selected.d100)
         };
         diceSelection.nameIsUnavailable = function () {
             return nameService.playerName == "";
@@ -107,12 +110,15 @@ angular.module("diceApp", [])
                     ) > 0
         };
         diceSelection.openRoll = function () {
-            diceSelection.roll(false);
+            diceSelection.roll(false, false);
         };
         diceSelection.secretRoll = function () {
-            diceSelection.roll(true);
+            diceSelection.roll(true, false);
         };
-        diceSelection.roll = function (secret) {
+        diceSelection.d100Roll = function() {
+            diceSelection.roll(false, true);
+        };
+        diceSelection.roll = function (secret, d100) {
             var webSocket = createWebSocket("/roll");
             webSocket.onopen = function () {
                 webSocket.send(
@@ -120,7 +126,8 @@ angular.module("diceApp", [])
                         {
                             playerName: nameService.playerName,
                             diceThrow: diceSelection.selected,
-                            secret: secret
+                            secret: secret,
+                            d100: d100
                         }
                     )
                 );

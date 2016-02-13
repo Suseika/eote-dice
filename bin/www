@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('eote-dice:server');
 var http = require('http');
+var D100 = require('../eote-model/dice/D100');
 
 /**
  * Get port from environment and store in Express.
@@ -139,10 +140,12 @@ var EffectiveResult = require('../eote-model/dice/EffectiveResult');
 
 function diceThrowResult(diceThrowRequest) {
   var rolledSides = DiceThrow.fromRequest(diceThrowRequest.diceThrow).resultingSides();
+  console.log(diceThrowRequest)
   return {
     playerName: diceThrowRequest.playerName,
     rolledSides: rolledSides,
     effects: new EffectiveResult(rolledSides),
+    d100: diceThrowRequest.d100 ? new D100().roll() : -1,
     secret: diceThrowRequest.secret
   };
 }

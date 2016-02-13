@@ -26,7 +26,7 @@ DiceThrow.fromRequest = function (parsedObject) {
                     }
                 })
                 .filter(function (dieTypeThrow) {
-                    return dieTypeThrow.amount > 0;
+                    return dieTypeThrow .amount > 0;
                 })
                 .map(function (dieTypeThrow) {
                     var dice = _.range(0, dieTypeThrow.amount)
